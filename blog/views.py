@@ -22,7 +22,7 @@ def register(request):
             return redirect('register')
 
         if User.objects.filter(username=username).exists():
-            # messages.error(request, "Username already exists")
+            messages.error(request, "Username already exists")
             print("Username already exists")
             return redirect('register')
 
@@ -47,7 +47,7 @@ def user_login(request):
             login(request, user)
             return redirect('home')
         else:
-            # messages.error(request, "Invalid credentials")
+            messages.error(request, "Invalid credentials")
             print("invalid credentials")
             return redirect('login')
 
@@ -94,7 +94,7 @@ def edit_blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
 
     if blog.author != request.user:
-        return "You are not allowed"
+        return HttpResponseForbidden("You are not allowed")
 
     if request.method == "POST":
         blog.title = request.POST['title']

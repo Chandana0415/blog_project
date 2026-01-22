@@ -64,6 +64,7 @@ def create_blog(request):
             title=title,
             content=content
         )
+        messages.success(request, "Blog created!")
         return redirect('home')
 
     return render(request, 'create_blog.html')
@@ -100,6 +101,7 @@ def edit_blog(request, blog_id):
         blog.title = request.POST['title']
         blog.content = request.POST['content']
         blog.save()
+        messages.success(request, "Blog updated!")
         return redirect('home')
 
     return render(request, 'edit_blog.html', {'blog': blog})
@@ -113,6 +115,7 @@ def delete_blog(request, blog_id):
         return HttpResponseForbidden("You are not allowed")
 
     blog.delete()
+    messages.success(request, "Blog deleted!")
     return redirect('home')
 
 @login_required

@@ -53,8 +53,7 @@ def user_login(request):
 
     return render(request, 'login.html')
 
-
-
+@login_required
 def create_blog(request):
     if request.method == "POST":
         title = request.POST['title']
@@ -90,14 +89,12 @@ def user_logout(request):
     return redirect('login')
 
 
-
-
 @login_required
 def edit_blog(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
 
     if blog.author != request.user:
-        return HttpResponseForbidden("You are not allowed")
+        return "You are not allowed"
 
     if request.method == "POST":
         blog.title = request.POST['title']
@@ -117,7 +114,6 @@ def delete_blog(request, blog_id):
 
     blog.delete()
     return redirect('home')
-
 
 @login_required
 def add_comment(request, blog_id):

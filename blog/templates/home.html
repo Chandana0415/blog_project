@@ -6,15 +6,15 @@
 {% for blog in blogs %}
     <h2 style="font-style: italic;">{{ blog.title }}</h2>
     <p style="font-style: italic;">{{ blog.content }}</p>
-    <p style="font-style: italic;">--By {{ blog.author.username }}</p>
+    <p style="font-style: italic; display: flex; justify-content: end;">--By {{ blog.author.username }}</p>
 
     <!-- LIKE BUTTON -->
     <form method="POST" action="{% url 'like_blog' blog.id %}">
         {% csrf_token %}
         {% if user in blog.likes.all %}
-            <button>❤️</button>
+            <button style="background: none;">❤️</button>
         {% else %}
-            <button>🤍</button>
+            <button style="background: none;">🤍</button>
         {% endif %}
     </form>
 

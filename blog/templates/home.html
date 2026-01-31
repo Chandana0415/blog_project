@@ -38,7 +38,7 @@
     {% endfor %}
 
     {% if user.is_authenticated %}
-    <form method="POST" action="{% url 'add_comment' blog.id %}">
+    <form method="POST" action="{% url 'add_comment' blog.id %}" style="display: flex; gap: 10px; align-items: center;">
         {% csrf_token %}
         <input style="font-style: italic;" type="text" name="comment" placeholder="Add comment" required>
         <button style="font-style: italic;" type="submit">Post</button>
